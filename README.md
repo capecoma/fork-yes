@@ -30,10 +30,11 @@ Restart Claude Code to load the command.
 ## Usage
 
 ```
-/fork
+/fork          # Opens in new tab (default)
+/fork window   # Opens in new window
 ```
 
-That's it. Claude executes two bash commands and opens a new terminal tab with your forked conversation.
+That's it. Claude executes two bash commands and opens a new terminal with your forked conversation.
 
 **Why use this?**
 - Branch off to explore a different approach without losing your current context
