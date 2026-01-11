@@ -1,26 +1,31 @@
-# Claude Code Skills
+# Fork Yes!
 
-Custom slash commands for [Claude Code](https://claude.ai/code) that extend its functionality.
+A `/fork` command for [Claude Code](https://claude.ai/code) that lets you branch conversations mid-session into a new terminal tab.
+
+Like Gemini Studio's conversation branching, but for Claude Code.
 
 ## Installation
 
-Copy the `.md` files from this repo to your Claude Code commands directory:
-
 ```bash
-# Global (available in all projects)
-cp *.md ~/.claude/commands/
-
-# Or project-specific
-cp *.md /path/to/your/project/.claude/commands/
+# Copy to your global Claude commands directory
+curl -o ~/.claude/commands/fork.md https://raw.githubusercontent.com/capecoma/fork-yes/master/fork.md
 ```
 
-Restart Claude Code to load the new commands.
+Or clone and copy manually:
+```bash
+git clone https://github.com/capecoma/fork-yes.git
+cp fork-yes/fork.md ~/.claude/commands/
+```
 
-## Available Skills
+Restart Claude Code to load the command.
 
-### `/fork` - Fork Current Conversation
+## Usage
 
-Fork your current Claude Code session into a new terminal tab, preserving full conversation context. Both sessions diverge independently from that point.
+```
+/fork
+```
+
+That's it. Claude executes two bash commands and opens a new terminal tab with your forked conversation.
 
 **Why use this?**
 - Branch off to explore a different approach without losing your current context
@@ -44,9 +49,11 @@ Claude will execute two bash commands automatically - the fork opens in a new te
 - PowerShell
 - Git Bash (for the bash commands)
 
-**Notes:**
-- Forking a long conversation takes longer to load (the full history is copied)
-- If context is near the limit, Claude may compact/summarize older messages on load
+**Performance Tips:**
+- **Fork early, not late** - Fork when you hit an interesting branch point, not when context is almost full
+- Long conversations = slower fork (full history is copied to new session)
+- If context is near the limit, Claude compacts/summarizes on load, adding delay
+- A short conversation forks in ~2 seconds; a near-full context can take 20+ seconds
 - The `--dangerously-skip-permissions` flag is included for seamless continuation
 
 ## Contributing
