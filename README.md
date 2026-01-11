@@ -4,6 +4,14 @@ A `/fork` command for [Claude Code](https://claude.ai/code) that lets you branch
 
 Like Gemini Studio's conversation branching, but for Claude Code.
 
+## Platform Support
+
+| Platform | Status |
+|----------|--------|
+| Windows  | Tested |
+| macOS    | **Untested** - should work with Terminal.app, PRs welcome! |
+| Linux    | Not yet supported |
+
 ## Installation
 
 ```bash
@@ -30,35 +38,34 @@ That's it. Claude executes two bash commands and opens a new terminal tab with y
 **Why use this?**
 - Branch off to explore a different approach without losing your current context
 - Keep researching in one session while implementing in another
-- Similar to Gemini Studio's conversation branching feature
+- Works reliably even with 10+ sessions open in the same project
 
 **How it works:**
 1. Generates a unique marker that gets logged to the session file
-2. Searches session files to find the exact current session (works even with 10+ sessions open)
-3. Opens a new Windows Terminal tab with the forked session
-
-**Usage:**
-```
-/fork
-```
-
-Claude will execute two bash commands automatically - the fork opens in a new terminal tab.
+2. Searches session files to find the exact current session
+3. Opens a new terminal tab with the forked session
 
 **Requirements:**
+
+*Windows:*
 - Windows Terminal (`wt`)
 - PowerShell
-- Git Bash (for the bash commands)
+- Git Bash
 
-**Performance Tips:**
+*macOS:*
+- Terminal.app (default) or iTerm2
+- Bash/Zsh
+
+## Performance Tips
+
 - **Fork early, not late** - Fork when you hit an interesting branch point, not when context is almost full
 - Long conversations = slower fork (full history is copied to new session)
 - If context is near the limit, Claude compacts/summarizes on load, adding delay
 - A short conversation forks in ~2 seconds; a near-full context can take 20+ seconds
-- The `--dangerously-skip-permissions` flag is included for seamless continuation
 
 ## Contributing
 
-Found a useful Claude Code workflow? PRs welcome!
+Found a bug on Mac? PRs welcome! The macOS support is untested.
 
 ## License
 
