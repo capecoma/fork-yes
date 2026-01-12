@@ -26,13 +26,15 @@ FORK_MARKER="FORK_$(date +%s)_$$" && echo "FORK_MARKER:$FORK_MARKER"
 
 ### Step 2 - Find session and fork (run immediately after step 1)
 
+**IMPORTANT**: Replace `MARKER_FROM_STEP1` below with the exact marker value from Step 1's output (e.g., `FORK_1768156595_340898`).
+
 Detect OS and run the appropriate command:
 
 ```bash
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  PROJECT_DIR=$(ls -d "$HOME/.claude/projects/"* 2>/dev/null | grep -i "$(pwd | sed 's|^/|--|' | sed 's|/|-|g')" | head -1) && SESSION_FILE=$(grep -l "FORK_MARKER:FORK_" "$PROJECT_DIR"/*.jsonl 2>/dev/null | grep -v agent- | head -1) && SESSION_ID=$(basename "$SESSION_FILE" .jsonl) && WORK_DIR=$(pwd) && echo "Forking session: $SESSION_ID" && osascript -e "tell application \"Terminal\" to do script \"cd '$WORK_DIR' && claude --resume $SESSION_ID --fork-session --dangerously-skip-permissions\""
+  PROJECT_DIR=$(ls -d "$HOME/.claude/projects/"* 2>/dev/null | grep -i "$(pwd | sed 's|^/|--|' | sed 's|/|-|g')" | head -1) && SESSION_FILE=$(grep -l "MARKER_FROM_STEP1" "$PROJECT_DIR"/*.jsonl 2>/dev/null | grep -v agent- | head -1) && SESSION_ID=$(basename "$SESSION_FILE" .jsonl) && WORK_DIR=$(pwd) && echo "Forking session: $SESSION_ID" && osascript -e "tell application \"Terminal\" to do script \"cd '$WORK_DIR' && claude --resume $SESSION_ID --fork-session --dangerously-skip-permissions\""
 else
-  PROJECT_DIR=$(ls -d "$HOME/.claude/projects/"* 2>/dev/null | grep -i "$(pwd | sed 's|^/c/|C--|i' | sed 's|/|-|g')" | head -1) && SESSION_FILE=$(grep -l "FORK_MARKER:FORK_" "$PROJECT_DIR"/*.jsonl 2>/dev/null | grep -v agent- | head -1) && SESSION_ID=$(basename "$SESSION_FILE" .jsonl) && WORK_DIR=$(pwd | sed 's|^/c|C:|' | sed 's|/|\\\\|g') && echo "Forking session: $SESSION_ID" && wt new-tab -d "$WORK_DIR" powershell -NoExit -Command "claude --resume $SESSION_ID --fork-session --dangerously-skip-permissions"
+  PROJECT_DIR=$(ls -d "$HOME/.claude/projects/"* 2>/dev/null | grep -i "$(pwd | sed 's|^/c/|C--|i' | sed 's|/|-|g')" | head -1) && SESSION_FILE=$(grep -l "MARKER_FROM_STEP1" "$PROJECT_DIR"/*.jsonl 2>/dev/null | grep -v agent- | head -1) && SESSION_ID=$(basename "$SESSION_FILE" .jsonl) && WORK_DIR=$(pwd | sed 's|^/c|C:|' | sed 's|/|\\\\|g') && echo "Forking session: $SESSION_ID" && wt new-tab -d "$WORK_DIR" powershell -NoExit -Command "claude --resume $SESSION_ID --fork-session --dangerously-skip-permissions"
 fi
 ```
 
