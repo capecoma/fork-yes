@@ -43,17 +43,21 @@ That's it. Claude executes two bash commands and opens a new terminal tab with y
 **How it works:**
 1. Generates a unique marker that gets logged to the session file
 2. Searches session files to find the exact current session
-3. Opens a new terminal tab with the forked session
+3. Detects terminal type and opens fork appropriately
+
+**Smart behavior:**
+- **Windows Terminal** → opens new tab in same window
+- **Standalone PowerShell** → opens new window (tabs not supported)
+- **macOS Terminal** → opens new window
 
 **Requirements:**
 
 *Windows:*
-- Windows Terminal (`wt`)
-- PowerShell
+- Windows Terminal (`wt`) or standalone PowerShell
 - Git Bash
 
 *macOS:*
-- Terminal.app (default) or iTerm2
+- Terminal.app
 - Bash/Zsh
 
 ## Performance Tips
