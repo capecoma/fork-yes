@@ -9,7 +9,8 @@ Like Gemini Studio's conversation branching, but for Claude Code.
 | Platform | Status |
 |----------|--------|
 | Windows  | Tested |
-| macOS    | **Untested** - should work with Terminal.app, PRs welcome! |
+| macOS (iTerm2) | **Untested** - native AppleScript support, PRs welcome! |
+| macOS (Terminal.app) | **Untested** - requires Accessibility permissions, PRs welcome! |
 | Linux    | Not yet supported |
 
 ## Installation
@@ -48,7 +49,8 @@ That's it. Claude executes two bash commands and opens a new terminal tab with y
 **Smart behavior:**
 - **Windows Terminal** → opens new tab in same window
 - **Standalone PowerShell** → opens new window (tabs not supported)
-- **macOS Terminal** → opens new window
+- **macOS iTerm2** → opens new tab in same window (native AppleScript)
+- **macOS Terminal.app** → opens new tab in same window (keyboard simulation)
 
 **Requirements:**
 
@@ -57,7 +59,8 @@ That's it. Claude executes two bash commands and opens a new terminal tab with y
 - Git Bash
 
 *macOS:*
-- Terminal.app
+- iTerm2 or Terminal.app
+- Terminal.app requires Accessibility permissions (System Preferences → Privacy & Security → Accessibility)
 - Bash/Zsh
 
 ## Performance Tips
